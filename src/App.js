@@ -6,7 +6,6 @@ import Table from './components/pages/Table';
 const App = () => {
   return (
     <Container>
-      <div>Hallo World</div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/table/:id" element={<Table />} />
