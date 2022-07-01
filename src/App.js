@@ -4,8 +4,12 @@ import Home from './components/pages/Home';
 import TablePage from './components/pages/TablePage';
 import Footer from './components/view/Footer/Footer';
 import TopBar from './components/view/TopBar/TopBar';
+import { useDispatch } from 'react-redux';
+import { fetchTables } from './redux/tablesRedux';
 
 const App = () => {
+  const dispatch = useDispatch();
+  dispatch(fetchTables());
   return (
     <Container>
       <TopBar />
