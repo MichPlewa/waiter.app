@@ -4,7 +4,7 @@ import styles from './TopBar.module.scss';
 const TopBar = () => {
   return (
     <Navbar bg="primary" variant="dark" className={styles.root}>
-      <Container className={styles.container}>
+      <Container>
         <Navbar.Brand href="#home">Waiter.app</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">

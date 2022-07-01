@@ -1,0 +1,18 @@
+.root {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+  .status {
+    display: flex;
+    align-items: center;
+  }
+
+  .statusWeight {
+    font-weight: bold;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
