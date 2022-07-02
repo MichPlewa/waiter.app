@@ -1,8 +1,5 @@
 //selectors
-export const selectAllTables = ({ tables }) => {
-  console.log('redux', tables);
-  return tables;
-};
+export const selectAllTables = ({ tables }) => tables;
 // actions
 const createActionName = (actionName) => `app/tables/${actionName}`;
 
