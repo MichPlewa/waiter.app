@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
-import TablePage from './components/pages/TablePage';
+import TablePage from './components/features/TablePage/TablePage';
 import Footer from './components/view/Footer/Footer';
 import TopBar from './components/view/TopBar/TopBar';
 import { useDispatch } from 'react-redux';
