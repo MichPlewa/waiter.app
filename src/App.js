@@ -6,10 +6,11 @@ import Footer from './components/view/Footer/Footer';
 import TopBar from './components/view/TopBar/TopBar';
 import { useDispatch } from 'react-redux';
 import { fetchTables } from './redux/tablesRedux';
+import { useEffect } from 'react';
 
 const App = () => {
   const dispatch = useDispatch();
-  dispatch(fetchTables());
+  useEffect(() => dispatch(fetchTables()), [dispatch]);
   return (
     <Container>
       <TopBar />
