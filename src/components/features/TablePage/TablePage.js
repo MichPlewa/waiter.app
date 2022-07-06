@@ -1,17 +1,20 @@
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import styles from './TablePage.module.scss';
-import { selectTableById } from '../../../redux/tablesRedux';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { editTableRequest, selectTableById } from '../../../redux/tablesRedux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const TablePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
-  let table = useSelector((state) => selectTableById(state, parseInt(id)));
+  let table = useSelector((state) => selectTableById(state, id));
   const [status, setStatus] = useState('Free');
   const [people, setPeople] = useState(1);
   const [maxPeopleAmount, setMaxPeopleAmount] = useState(1);
   const [bill, setBill] = useState(0);
+  const allStatus = ['Free', 'Busy', 'Cleaning'];
   useEffect(() => {
     if (table) {
       setStatus(table.status);
@@ -20,7 +23,14 @@ const TablePage = () => {
       setBill(table.bill);
     }
   }, [table]);
-  const allStatus = ['Free', 'Busy', 'Cleaning'];
+
+  const handleSubmit = (e) => {
+    console.log('dupa');
+    e.preventDefault();
+    dispatch(editTableRequest({ id, people, maxPeopleAmount, bill, status }));
+    navigate('/');
+  };
+
   if (!table) {
     return <div>Loading</div>;
   } else {
@@ -71,6 +81,13 @@ const TablePage = () => {
             />
           </Form.Group>
         </div>
+        <Button
+          onClick={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          Update
+        </Button>
       </div>
     );
   }

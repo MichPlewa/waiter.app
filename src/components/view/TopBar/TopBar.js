@@ -9,7 +9,9 @@ const TopBar = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            <Button className={styles.button}>Home</Button>
+            <Button className={styles.button} href={'/'}>
+              Home
+            </Button>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
