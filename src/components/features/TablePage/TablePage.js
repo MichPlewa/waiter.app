@@ -14,7 +14,7 @@ const TablePage = () => {
   const [people, setPeople] = useState(1);
   const [maxPeopleAmount, setMaxPeopleAmount] = useState(1);
   const [bill, setBill] = useState(0);
-  const allStatus = ['Free', 'Busy', 'Cleaning'];
+  const allStatus = ['Free', 'Busy', 'Cleaning', 'Reservet'];
   useEffect(() => {
     if (table) {
       setStatus(table.status);
@@ -25,10 +25,26 @@ const TablePage = () => {
   }, [table]);
 
   const handleSubmit = (e) => {
-    console.log('dupa');
     e.preventDefault();
     dispatch(editTableRequest({ id, people, maxPeopleAmount, bill, status }));
     navigate('/');
+  };
+
+  const changePeople = (number) => {
+    if (number <= maxPeopleAmount) {
+      setPeople(number);
+    } else if (number > maxPeopleAmount) {
+      setPeople(maxPeopleAmount);
+    }
+  };
+
+  const changeMaxPeople = (number) => {
+    console.log(number);
+    if (number <= 10) {
+      setMaxPeopleAmount(number);
+    } else {
+      setMaxPeopleAmount(10);
+    }
   };
 
   if (!table) {
@@ -58,7 +74,7 @@ const TablePage = () => {
             <Form.Control
               type="number"
               value={people}
-              onChange={(e) => setPeople(e.target.value)}
+              onChange={(e) => changePeople(e.target.value)}
             />
           </Form.Group>
           <span>&nbsp;/&nbsp;</span>
@@ -66,21 +82,26 @@ const TablePage = () => {
             <Form.Control
               type="number"
               value={maxPeopleAmount}
-              onChange={(e) => setMaxPeopleAmount(e.target.value)}
+              onChange={(e) => changeMaxPeople(e.target.value)}
             />
           </Form.Group>
         </div>
-        <div className={styles.bill}>
-          <b className="col-1">Bill:</b>
-          <div>$&nbsp;</div>
-          <Form.Group className={styles.number}>
-            <Form.Control
-              type="number"
-              value={bill}
-              onChange={(e) => setBill(e.target.value)}
-            />
-          </Form.Group>
-        </div>
+        {status === 'Busy' ? (
+          <div className={styles.bill}>
+            <b className="col-1">Bill:</b>
+            <div>$&nbsp;</div>
+            <Form.Group className={styles.number}>
+              <Form.Control
+                type="number"
+                value={bill}
+                onChange={(e) => setBill(e.target.value)}
+              />
+            </Form.Group>
+          </div>
+        ) : (
+          <div></div>
+        )}
+
         <Button
           onClick={(e) => {
             handleSubmit(e);
