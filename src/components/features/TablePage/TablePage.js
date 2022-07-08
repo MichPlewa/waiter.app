@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const TablePage = () => {
+const TablePage = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  let table = useSelector((state) => selectTableById(state, id));
-  const [status, setStatus] = useState('Free');
-  const [people, setPeople] = useState(1);
-  const [maxPeopleAmount, setMaxPeopleAmount] = useState(1);
-  const [bill, setBill] = useState(0);
+  const table = useSelector((state) => selectTableById(state, id));
+  const [status, setStatus] = useState(props.status);
+  const [people, setPeople] = useState(props.people);
+  const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeople);
+  const [bill, setBill] = useState(props.bill);
   const allStatus = ['Free', 'Busy', 'Cleaning', 'Reservet'];
   useEffect(() => {
     if (table) {
@@ -39,7 +39,6 @@ const TablePage = () => {
   };
 
   const changeMaxPeople = (number) => {
-    console.log(number);
     if (number <= 10) {
       setMaxPeopleAmount(number);
     } else {
