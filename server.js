@@ -1,4 +1,5 @@
 /* global require, process */
+const path = require('path');
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('build/db/app.json');
@@ -13,6 +14,9 @@ server.use(
     '/api/*': '/$1',
   })
 );
-
+server.use('/table/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 server.use(router);
+
 server.listen(port);
